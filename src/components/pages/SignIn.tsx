@@ -114,7 +114,9 @@ const SignIn: React.FC = () => {
                 type="submit"
                 variant="outlined"
                 color="primary"
-                disabled={!email || !password ? true : false}
+                disabled={!email || !password ? true : false} // 空欄があった場合はボタンを押せないように
+                className={classes.submitBtn}
+                onClick={handleSubmit}
                 >
                 送信
               </Button>
