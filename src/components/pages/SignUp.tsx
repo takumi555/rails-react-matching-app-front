@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 // サインアップ用ページ
+// React.FCは、constによる型定義でコンポーネントを定義できる型
 const SignUp: React.FC = () => {
   const classes = useStyles()
   const navigate = useNavigate()

@@ -53,7 +53,6 @@ const App: React.FC = () => {
   const Private = ({ children }: { children: React.ReactElement }) => {
     if (!loading) {
       if (isSignedIn) {
-        //さいんしていたらchildre表示
         return children
       } else {
         //サインインしていなければ、サインインページにリダイレクト
@@ -71,7 +70,8 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />}  />
-            <Route element={<Private><Route path="/" element={<Home />} /></Private>} />
+            {/* TODO: path="/"のやり方は良くないかも */}
+            <Route path="/" element={<Private>{<Home />}</Private>} />
           </Routes>
         </CommonLayout>
       </AuthContext.Provider>
