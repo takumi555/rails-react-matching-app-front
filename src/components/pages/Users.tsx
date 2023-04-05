@@ -16,7 +16,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
 import AlertMessage from "components/utils/AlertMessage"
 
 import { prefectures } from "data/prefectures"
-import {  getUsers } from "lib/api/users"
+import { getUsers } from "lib/api/users"
 import { getLikes, createLike } from "lib/api/likes"
 import { User, Like } from "interfaces/index"
 
@@ -53,7 +53,7 @@ const Users: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true)
   const [users, setUsers] = useState<User[]>([])
   const [user, setUser] = useState<User>(initialUserState)
-  const [userDetailOpen, setUserDetailOpen] = useState<boolean>(false) // ?
+  const [userDetailOpen, setUserDetailOpen] = useState<boolean>(false)
   const [likedUsers, setLikedUsers] = useState<User[]>([])
   const [likes, setLikes] = useState<Like[]>([])
   const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false)
@@ -237,7 +237,7 @@ const Users: React.FC = () => {
           <Grid container justify="center">
             <Button
               variant="outlined"
-              onClick={() => isLikeduser(user.id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+              onClick={() => isLikeduser(user.id) ? void(0) : handleCreateLike(user)}
               color="secondary"
               startIcon={isLikeduser(user.id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
               disabled={isLikeduser(user.id) ? true : false}
