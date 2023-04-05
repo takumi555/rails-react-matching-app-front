@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, ReactHTML } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import Cookies from "js-cookie"
 
@@ -70,7 +70,10 @@ const SignIn: React.FC = () => {
         setIsSignedIn(true)
         setCurrentUser(res.data.data)
 
-        navigate("/")
+        navigate("/home")
+
+        setEmail("")
+        setPassword("")
 
         console.log("Signed in successfully!")
       } else {
@@ -95,7 +98,7 @@ const SignIn: React.FC = () => {
               label="メールアドレス"
               value={email}
               margin="dense"
-              onChange={event => setEmail(event.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             />
             <TextField 
               variant="outlined"
@@ -107,7 +110,7 @@ const SignIn: React.FC = () => {
               value={password}
               margin="dense"
               autoComplete="current-password"
-              onChange={event => setPassword(event.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             />
             <Box className={classes.submitBtn}>
               <Button

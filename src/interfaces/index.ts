@@ -24,6 +24,7 @@ export interface User {
   provider: string
   email: string
   name: string
+  profile: string
   image: {
     url: string
   }
@@ -56,7 +57,7 @@ export interface UpdateUserFormData extends FormData {
 // いいね
 export interface Like {
   id?: number
-  fromUserqId: number | undefined | null
+  fromUserId: number | undefined | null
   toUserId: number | undefined | null
 }
 
