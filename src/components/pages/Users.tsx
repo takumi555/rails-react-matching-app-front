@@ -138,7 +138,7 @@ const Users: React.FC = () => {
     }
   }
 
-  // useEffect: 渡した関数がレンダリング後に実行される
+  // useEffect
   useEffect(() => {
     handleGetUsers()
     handleGetLikes()

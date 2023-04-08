@@ -19,6 +19,6 @@ export const getUser = (id: number | undefined ) => {
 }
 
 // ユーザ情報を更新
-export const updateUser = (id: number | undefined ) => {
-  return client.put(`users/${id}`)
+export const updateUser = (id: number | undefined, data: UpdateUserFormData ) => {
+  return client.put(`users/${id}`, data)
 }
