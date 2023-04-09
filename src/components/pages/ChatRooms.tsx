@@ -61,7 +61,7 @@ const ChatRooms: React.FC = () => {
         chatRooms.length > 0 ? (
           chatRooms.map((chatRoom: ChatRoom, index: number) => {
             return (
-              <Grid container key={index} justify="center">
+              <Grid container key={index} justifyContent="center">
                 <List>
                   {/* 個別のチャットルームに飛ばす */}
                   <Link to={`/chatroom/${chatRoom.chatRoom.id}`} className={classes.link}>

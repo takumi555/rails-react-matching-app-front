@@ -210,7 +210,7 @@ const SignUp: React.FC = () => {
               >
                 {
                   genders.map((gender: string, index: number) => 
-                    <MenuItem value={index}>{gender}</MenuItem>
+                    <MenuItem key={index} value={index}>{gender}</MenuItem>
                   )
                 }
               </Select>
@@ -226,13 +226,13 @@ const SignUp: React.FC = () => {
               >
                 {
                   prefectures.map((prefecture: string, index: number) => 
-                    <MenuItem value={index}>{prefecture}</MenuItem>
+                    <MenuItem key={index} value={index}>{prefecture}</MenuItem>
                   )
                 }
               </Select>
             </FormControl>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <Grid container justify="space-around">
+              <Grid container justifyContent="space-around">
                 <KeyboardDatePicker
                   fullWidth
                   inputVariant="outlined"

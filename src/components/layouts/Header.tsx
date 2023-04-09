@@ -70,7 +70,7 @@ const Header: React.FC = () => {
           <>
             <IconButton
               component={Link}
-              to="/sign_in"
+              to="/signin"
               edge="start"
               className={classes.linkBtn}
               color="inherit"

@@ -165,7 +165,7 @@ const Home: React.FC = () => {
           <>
             <Card className={classes.card}>
               <CardContent>
-                <Grid container justify="flex-end">
+                <Grid container justifyContent="flex-end">
                   <Grid item>
                     <IconButton
                       onClick={() => setEditFormOpen(true)}
@@ -177,7 +177,7 @@ const Home: React.FC = () => {
                     </IconButton>
                   </Grid>
                 </Grid>
-                <Grid container justify="center">
+                <Grid container justifyContent="center">
                   <Grid item>
                     <Avatar
                       alt="avatar"
@@ -186,7 +186,7 @@ const Home: React.FC = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container justify="center">
+                <Grid container justifyContent="center">
                   <Grid item style={{ marginTop: "1.5rem" }}>
                     <Typography variant="body1" component="p" gutterBottom>
                       {`${currentUser?.name} ${currentUserAge()}歳　(${currentUserPrefecture()})`}
@@ -269,7 +269,7 @@ const Home: React.FC = () => {
                     multiline
                     fullWidth
                     label="自己紹介"
-                    rows="8"
+                    minRows="8"
                     value={profile}
                     margin="dense"
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
