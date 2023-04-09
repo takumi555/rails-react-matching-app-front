@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 
 import CommonLayout from "components/layouts/CommonLayout"
 import Home from "components/pages/Home"
+import ChatRoom from "components/pages/ChatRoom"
+import ChatRooms from "components/pages/ChatRooms"
+import Users from "components/pages/Users"
+import NotFound from "components/pages/NotFound"
 import SignUp from "components/pages/SignUp"
 import SignIn from "components/pages/SignIn"
 
@@ -12,7 +16,7 @@ import { User } from "interfaces/index"
 // グローバルで使う変数、関数
 export const AuthContext = createContext({} as {
   loading: boolean
-  setLoading: React.Dispatch<React.SetStateAction<boolean>> // ?
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
   isSignedIn: boolean
   setIsSignedIn: React.Dispatch<React.SetStateAction<boolean>>
   currentUser: User | undefined
@@ -69,10 +73,13 @@ const App: React.FC = () => {
         <CommonLayout>
           <Routes>
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/signin" element={<SignIn />}  />
-            {/* TODO: path="/"のやり方は良くないかも */}
-            <Route path="/" element={<Private>{<Home />}</Private>} />
-          </Routes>
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/chat_rooms" element={<ChatRooms />} />
+            <Route path="/chatroom/:id" element={<ChatRoom />} />
+            <Route element={<NotFound/>} />
+          </ Routes>
         </CommonLayout>
       </AuthContext.Provider>
     </Router>

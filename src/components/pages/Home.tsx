@@ -74,13 +74,13 @@ const Home: React.FC = () => {
 
   //アップロードした画像の情報を取得
   // useCallback: 第2引数の値が変わるまで、第1引数の関数を再生成しない
-  const uploadImage = useCallback((e) => {
+  const uploadImage = useCallback((e: any) => {
     const file = e.target.files[0]
     setImage(file)
   }, [])
 
   //画像プレビュー
-  const previewImage = useCallback((e) => {
+  const previewImage = useCallback((e: any) => {
     const file = e.target.files[0]
     setPreview(file)
   }, [])
@@ -160,6 +160,180 @@ const Home: React.FC = () => {
 
   return (
     <>
+      {
+        isSignedIn && currentUser ? (
+          <>
+            <Card className={classes.card}>
+              <CardContent>
+                <Grid container justify="flex-end">
+                  <Grid item>
+                    <IconButton
+                      onClick={() => setEditFormOpen(true)}
+                    >
+                      <SettingsIcon
+                        color="action"
+                        fontSize="small"
+                      />
+                    </IconButton>
+                  </Grid>
+                </Grid>
+                <Grid container justify="center">
+                  <Grid item>
+                    <Avatar
+                      alt="avatar"
+                      src={currentUser?.image.url}
+                      className={classes.avatar}
+                    />
+                  </Grid>
+                </Grid>
+                <Grid container justify="center">
+                  <Grid item style={{ marginTop: "1.5rem" }}>
+                    <Typography variant="body1" component="p" gutterBottom>
+                      {`${currentUser?.name} ${currentUserAge()}歳　(${currentUserPrefecture()})`}
+                    </Typography>
+                    <Divider style={{ marginTop: "0.5rem" }} />
+                    <Typography
+                      variant="body2"
+                      component="p"
+                      gutterBottom
+                      style={{ marginTop: "0.5rem", fontWeight: "bold" }}
+                    >
+                      自己紹介
+                    </Typography>
+                    {
+                      currentUser.profile ? (
+                        <Typography variant="body2" component="p" color="textSecondary">
+                          {currentUser.profile}
+                        </Typography>
+                      ) : (
+                        <Typography variant="body2" component="p" color="textSecondary">
+                          よろしくお願いします！
+                        </Typography>
+                      )
+                    }
+                    <Button
+                      variant="outlined"
+                      onClick={handleSignOut}
+                      color="primary"
+                      fullWidth
+                      startIcon={<ExitToAppIcon />}
+                      style={{ marginTop: "1rem" }}
+                    >
+                      サインアウト
+                    </Button>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+            <form noValidate autoComplete="off">
+              <Dialog
+                open={editFormOpen}
+                keepMounted
+                onClose={() => setEditFormOpen(false)}
+              >
+                <DialogTitle style={{ textAlign: "center" }}>
+                  プロフィールの変更
+                </DialogTitle>
+                <DialogContent>
+                  <TextField 
+                    variant="outlined"
+                    required
+                    fullWidth
+                    label="名前"
+                    value={name}
+                    margin="dense"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+                  />
+                  <FormControl
+                    variant="outlined"
+                    margin="dense"
+                    fullWidth
+                  >
+                    <InputLabel id="demo-simple-select-outlined-label">都道府県</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-outlined-label"
+                      value={prefecture}
+                      onChange={(e: React.ChangeEvent<{value: unknown}>) => setPrefecture(e.target.value as number)}
+                      label="都道府県"
+                    >
+                      {
+                        prefectures.map((prefecture, index) => 
+                          <MenuItem key={ index + 1 } value={ index + 1 }>{prefecture}</MenuItem>
+                        )
+                      }
+                    </Select>
+                  </FormControl>
+                  <TextField
+                    placeholder="1000文字以内で書いてください。"
+                    variant="outlined"
+                    multiline
+                    fullWidth
+                    label="自己紹介"
+                    rows="8"
+                    value={profile}
+                    margin="dense"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setProfile(e.target.value)
+                    }}
+                    />
+                    <div className={classes.imageUploadBtn}>
+                      <input
+                        accept="image/*"
+                        className={classes.input}
+                        id="icon-button-file"
+                        type="file"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                          uploadImage(e)
+                          previewImage(e)
+                        }}
+                      />
+                      <label htmlFor="icon-button-file">
+                        <IconButton
+                          color="primary"
+                          aria-label="upload picture"
+                          component="span"
+                        >
+                          <PhotoCamera />
+                        </IconButton>
+                      </label>
+                    </div>
+                    {
+                    preview ? (
+                      <Box
+                        className={classes.box}
+                      >
+                        <IconButton
+                          color="inherit"
+                          onClick={() => setPreview("")}
+                        >
+                          <CancelIcon />
+                        </IconButton>
+                        <img
+                          src={preview}
+                          alt="preview img"
+                          className={classes.preview}
+                        />
+                      </Box>
+                    ) : null
+                  }
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    onClick={handleSubmit}
+                    color="primary"
+                    disabled={!name || !profile ? true : false}
+                  >
+                    送信
+                  </Button>
+                </DialogActions>
+              </Dialog>
+
+            </form>
+          </>
+        ) : (
+          <></>
+        )
+      }
     </>
   )
 

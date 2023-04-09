@@ -1,4 +1,4 @@
-import client from "lid/api/client"
+import client from "lib/api/client"
 import Cookies from "js-cookie"
 
 // マッチングしたユーザとの全てのチャットルーム情報を取得
