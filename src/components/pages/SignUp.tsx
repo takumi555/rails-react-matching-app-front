@@ -226,7 +226,7 @@ const SignUp: React.FC = () => {
               >
                 {
                   prefectures.map((prefecture: string, index: number) => 
-                    <MenuItem key={index} value={index}>{prefecture}</MenuItem>
+                    <MenuItem key={index + 1} value={index + 1}>{prefecture}</MenuItem>
                   )
                 }
               </Select>
